@@ -9,6 +9,9 @@ import mlflow.sklearn
 import dagshub
 import os
 from src.logger import logging
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # Below code block is for production use
