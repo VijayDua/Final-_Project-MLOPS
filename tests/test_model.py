@@ -29,10 +29,9 @@ class TestModelLoading(unittest.TestCase):
         # Load the new model from MLflow model registry
         # cls.new_model_name = "my_model"
         # cls.new_model_version = cls.get_latest_model_version(cls.new_model_name)
-        # cls.new_model_uri = f'#/models:/{cls.new_model_name}/{cls.new_model_version}'
-        # cls.new_model = mlflow.pyfunc.load_model(cls.new_model_uri)
-
-        cls.new_model = mlflow.pyfunc.load_model("https://dagshub.com/VijayDua/Final-_Project-MLOPS/models/my_model/10")
+        # cls.new_model_uri = f'models:/{cls.new_model_name}/{cls.new_model_version}'
+        cls.new_model_uri = "models:/my_model/11"
+        cls.new_model = mlflow.pyfunc.load_model(cls.new_model_uri)
 
         # Load the vectorizer
         cls.vectorizer = pickle.load(open('models/vectorizer.pkl', 'rb'))
