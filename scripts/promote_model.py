@@ -23,7 +23,7 @@ def promote_model():
 
     model_name = "my_model"
     # Get the latest version in staging
-    latest_version_staging = client.get_latest_versions(model_name)[0].version
+    latest_version_staging = client.get_latest_versions(model_name)
 
     # Archive the current production model
     prod_versions = client.get_latest_versions(model_name, stages=["Production"])
