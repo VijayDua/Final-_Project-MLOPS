@@ -26,9 +26,18 @@ class TestModelLoading(unittest.TestCase):
         # Set up MLflow tracking URI
         mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
-        # Load the new model from MLflow model registry
+        from mlflow.tracking import MlflowClient
+
         cls.new_model_name = "my_model"
-        cls.new_model_version = cls.get_latest_model_version(cls.new_model_name)
+        # Get all versions of the registered model
+        versions = cls.get_latest_versions(cls.new_model_name, stages=["None", "Staging", "Production", "Archived"])
+
+        # Find the latest version by version number
+        latest_version = max(versions, key=lambda v: int(v.version))
+        cls.latest_model_version = latest_version.version
+
+        # Load the new model from MLflow model registry
+        
         cls.new_model_uri = f'models:/{cls.new_model_name}/{cls.new_model_version}'
         cls.new_model = mlflow.pyfunc.load_model(cls.new_model_uri)
 
